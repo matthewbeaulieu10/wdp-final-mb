@@ -1,4 +1,20 @@
 html {
     background-color: black;
     color:red;
+    font-family:'Arial Black';
+}
+
+#titleBar, #urmom, #logo {
+    display:inline-block
+}
+
+#menuBar {
+    background-color:red;
+    color:red;
+    height:40px;
+}
+
+.menuButton {
+    background-color:white;
+    border-style:none;
 }

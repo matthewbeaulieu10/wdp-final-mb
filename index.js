@@ -10,6 +10,14 @@ const minorVersion = 2
 // Use Express to publish static HTML, CSS, and JavaScript files that run in the browser. 
 app.use(express.static(__dirname + '/static'))
 
+app.get('/roster',function(req,res) {
+	res.sendFile(__dirname + '/static/roster.html')
+})
+
+app.get('/schedule',function(req,res) {
+	res.sendFile(__dirname + '/static/schedule.html')
+})
+
 // Custom 404 page.
 app.use((request, response) => {
   response.type('text/plain')
