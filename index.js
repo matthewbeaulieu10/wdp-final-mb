@@ -18,6 +18,17 @@ app.get('/schedule',function(req,res) {
 	res.sendFile(__dirname + '/static/schedule.html')
 })
 
+var games = { 
+      "games": [
+        {"date":"08/25/22","opponent":"Purdue Northwest University","venue":"home","score":"2-0 Lewis","point-getters":["Zimmerman (G)", "Shevchenko (G)", "Darlage (A)", "Beaulieu (A)" ]}
+      ]
+}
+
+app.get('/games', (request, response) => {
+  response.type('application/json')
+  response.send(JSON.stringify(games, null, 4))
+})
+
 // Custom 404 page.
 app.use((request, response) => {
   response.type('text/plain')
