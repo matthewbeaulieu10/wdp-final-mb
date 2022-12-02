@@ -10,8 +10,33 @@ const minorVersion = 2
 // Use Express to publish static HTML, CSS, and JavaScript files that run in the browser. 
 app.use(express.static(__dirname + '/static'))
 
-app.get('/roster',function(req,res) {
-	res.sendFile(__dirname + '/static/roster.html')
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({extended:true}));
+
+const mongoose = require("mongoose");
+
+//password: FPXHV1aJWRzGdCRz
+const mongooseURI = "mongodb+srv://mthwbeaulieu:FPXHV1aJWRzGdCRz@playercluster.jey2g5j.mongodb.net/playerDatabase"
+mongoose.connect(mongooseURI, {useNewUrlParser: true}, {useUnifiedTopology: true})
+const playerSchema = {
+  name: String,
+  number: String
+}
+
+const Player = mongoose.model("player", playerSchema);
+
+app.post("/create", function(req,res) {
+  let newPlayer = new Player({
+    name: req.body.name,
+    number: req.body.number
+  })
+
+  newPlayer.save();
+  res.redirect("/")
+})
+
+app.get('/editRoster',function(req,res) {
+	res.sendFile(__dirname + '/static/editRoster.html')
 })
 
 app.get('/schedule',function(req,res) {

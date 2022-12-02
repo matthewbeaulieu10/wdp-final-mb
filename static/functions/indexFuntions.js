@@ -6,8 +6,8 @@ function testing() {
     }
 }
 
-function loadRosterPage() {
-    location.href=location.href + 'roster'
+function loadEditRosterPage() {
+    location.href=location.href + 'editRoster'
 }
 
 function loadSchedulePage() {
