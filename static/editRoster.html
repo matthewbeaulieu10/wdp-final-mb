@@ -3,6 +3,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="functions/indexFuntions.js"></script>
+    <link rel="stylesheet" href="stylesheets/index.css">
     <title>Pilots</title>
 </head>
 <body>
@@ -12,6 +14,20 @@
         <label>Name: </label> <input name="name"></input><br />
         <label>Number: </label> <input name="number"></input><br />
         <button>Create New Player</button>
+    </form>
+
+    <h3>Update Current Player</h3>
+    <form class ="container" method="post" action="/update">
+        <label>ID: </label> <input name="id"></input><br />
+        <label>New Name: </label> <input name="newName"></input><br />
+        <label>New Number: </label> <input name="newNumber"></input><br />
+        <button>Update Player</button>
+    </form>
+
+    <h3>Delete Current Player</h3>
+    <form class ="container" method="post" action="/delete">
+        <label>ID </label> <input name="id"></input><br />
+        <button>Delete Player</button>
     </form>
 </body>
 </html>

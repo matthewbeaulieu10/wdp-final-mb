@@ -35,8 +35,57 @@ app.post("/create", function(req,res) {
   res.redirect("/")
 })
 
+app.post("/update", function(req, res) {
+  Player.findByIdAndUpdate(
+    req.body.id,
+    {name:req.body.newName, number:req.body.newNumber},
+    function (err, docs) {
+      if (err) {
+        console.log(err)
+      } else {
+        console.log("i hope this updated it!")
+      }
+    })
+  res.redirect("/")
+})
+
+app.post("/delete", function(req, res) {
+  Player.findByIdAndDelete(
+    req.body.id,
+    function(err, docs) {
+      if (err) {
+        console.log(err)
+      } else {
+        console.log("i hope this deleted it")
+      }
+    })
+    res.redirect("/")
+})
+
+const renderPlayers = (playersArray) => {
+  let text = "Lewis Mens Soccer Roster: <br/><br/>";
+  playersArray.forEach((player)=>{
+    text += "name: " + player.name + "<br/>";
+    text += "number: " + player.number + "<br/>"; 
+    text += "id: " + player.id + "<br/><br/>";
+  })
+  text += "total count: " + playersArray.length;
+  return text
+}
+
+app.get("/read", function(request, response) {
+  Player.find({}).then(players => {
+    response.type('text/plain');
+    response.send(renderPlayers(players));
+  })
+})
+
 app.get('/editRoster',function(req,res) {
 	res.sendFile(__dirname + '/static/editRoster.html')
+})
+
+app.get('/readRoster', function(req,res) {
+  res.sendFile(__dirname + '/static/readRoster.html')
 })
 
 app.get('/schedule',function(req,res) {

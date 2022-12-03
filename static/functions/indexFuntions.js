@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 function testing() {
     if (document.getElementById("urmom").style.color == "red") {
         document.getElementById("urmom").style.color = "white";
@@ -10,8 +12,24 @@ function loadEditRosterPage() {
     location.href=location.href + 'editRoster'
 }
 
+function loadReadRosterPage() {
+    location.href=location.href + 'readRoster'
+}
+
 function loadSchedulePage() {
     location.href=location.href + 'schedule'
+}
+
+async function readPlayers() {
+    try{
+        const roster = await fetch("/read")
+        const datas = await roster.text()
+        document.getElementById("rosterList").innerHTML = datas
+    } catch(e) {
+        alert("uh oh")
+    }
+    
+
 }
 
 async function getGames() {
