@@ -10,14 +10,14 @@
 <body>
     <h1>Roster</h1>
     <h3>Create New Player</h3>
-    <form class="container" method="post" action="/create">
+    <form class="container" method="post" action="/createPlayer">
         <label>Name: </label> <input name="name"></input><br />
         <label>Number: </label> <input name="number"></input><br />
         <button>Create New Player</button>
     </form>
 
     <h3>Update Current Player</h3>
-    <form class ="container" method="post" action="/update">
+    <form class ="container" method="post" action="/updatePlayer">
         <label>ID: </label> <input name="id"></input><br />
         <label>New Name: </label> <input name="newName"></input><br />
         <label>New Number: </label> <input name="newNumber"></input><br />
@@ -25,7 +25,7 @@
     </form>
 
     <h3>Delete Current Player</h3>
-    <form class ="container" method="post" action="/delete">
+    <form class ="container" method="post" action="/deletePlayer">
         <label>ID </label> <input name="id"></input><br />
         <button>Delete Player</button>
     </form>

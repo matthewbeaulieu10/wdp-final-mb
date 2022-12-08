@@ -16,13 +16,17 @@ function loadReadRosterPage() {
     location.href=location.href + 'readRoster'
 }
 
-function loadSchedulePage() {
-    location.href=location.href + 'schedule'
+function loadEditSchedulePage() {
+    location.href=location.href + 'editSchedule'
+}
+
+function loadReadSchedulePage() {
+    location.href=location.href + 'readSchedule'
 }
 
 async function readPlayers() {
     try{
-        const roster = await fetch("/read")
+        const roster = await fetch("/readPlayers")
         const datas = await roster.text()
         document.getElementById("rosterList").innerHTML = datas
     } catch(e) {
@@ -32,37 +36,47 @@ async function readPlayers() {
 
 }
 
-async function getGames() {
+async function readGames() {
     try{
-        const response = await fetch("/games")
-        const data = await response.json()
-        saveGames(data)
-    } catch(e) {
-        alert("this crap not working")
-    }
-    showGames()
-}
-
-var games; 
-
-function saveGames(data) {
-    try{
-        games = Object.values(data.games)
-        console.log(games)
+        const schedule = await fetch("/readGames")
+        const data = await schedule.text()
+        document.getElementById("scheduleList").innerHTML = data
     } catch (e) {
-        alert("this crap not working")
+        alert("schedule uh oh")
     }
-    
 }
 
-function showGames() {
-    for(let i = 0; i < games.length; i++) {
-        document.getElementById("schedule").innerHTML = 
-        "GAME " + (i+1) + "<br/>" +
-        "opponent: " + games[i].opponent + "<br/>" +
-        "date: " + games[i].date + "<br/>" +
-        "score: " + games[i].score + "<br/>" +
-        "venue: " + games[i].venue;
-    }
+// async function getGames() {
+//     try{
+//         const response = await fetch("/games")
+//         const data = await response.json()
+//         saveGames(data)
+//     } catch(e) {
+//         alert("this crap not working")
+//     }
+//     showGames()
+// }
+
+// var games; 
+
+// function saveGames(data) {
+//     try{
+//         games = Object.values(data.games)
+//         console.log(games)
+//     } catch (e) {
+//         alert("this crap not working")
+//     }
     
-}
+// }
+
+// function showGames() {
+//     for(let i = 0; i < games.length; i++) {
+//         document.getElementById("schedule").innerHTML = 
+//         "GAME " + (i+1) + "<br/>" +
+//         "opponent: " + games[i].opponent + "<br/>" +
+//         "date: " + games[i].date + "<br/>" +
+//         "score: " + games[i].score + "<br/>" +
+//         "venue: " + games[i].venue;
+//     }
+    
+// }

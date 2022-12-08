@@ -1,0 +1,25 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flights</title>
+    <script src="functions/indexFuntions.js"></script>
+    <link rel="stylesheet" href="stylesheets/index.css">
+</head>
+<body>
+    <h1>Schedule</h1>
+    <div id="scheduleContainer">
+        <h3>Create New Game</h3>
+        <form class="container" method="post" action="/createGame">
+            <label>Date: </label> <input name="date"></input><br />
+            <label>Opponent: </label> <input name="opponent"></input><br />
+            <label>Venue: </label> <input name="venue"></input><br />
+            <label>Score: </label> <input name="score"></input><br />
+            <label>Victor: </label> <input name="victor"></input><br />
+            <label>Point Getters: </label> <input name="pointGetters"></input><br />
+            <button>Create New Game</button>
+        </form>
+    </div>
+</body>
+</html>

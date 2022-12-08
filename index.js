@@ -25,7 +25,7 @@ const playerSchema = {
 
 const Player = mongoose.model("player", playerSchema);
 
-app.post("/create", function(req,res) {
+app.post("/createPlayer", function(req,res) {
   let newPlayer = new Player({
     name: req.body.name,
     number: req.body.number
@@ -35,7 +35,7 @@ app.post("/create", function(req,res) {
   res.redirect("/")
 })
 
-app.post("/update", function(req, res) {
+app.post("/updatePlayer", function(req, res) {
   Player.findByIdAndUpdate(
     req.body.id,
     {name:req.body.newName, number:req.body.newNumber},
@@ -49,7 +49,7 @@ app.post("/update", function(req, res) {
   res.redirect("/")
 })
 
-app.post("/delete", function(req, res) {
+app.post("/deletePlayer", function(req, res) {
   Player.findByIdAndDelete(
     req.body.id,
     function(err, docs) {
@@ -73,7 +73,57 @@ const renderPlayers = (playersArray) => {
   return text
 }
 
-app.get("/read", function(request, response) {
+app.get("/readPlayers", function(request, response) {
+  Player.find({}).then(players => {
+    response.type('text/plain');
+    response.send(renderPlayers(players));
+  })
+})
+
+const gameSchema = {
+  date: String,
+  opponent: String,
+  venue: String,
+  score: String, 
+  victor: String,
+  pointGetters: String
+}
+
+const Game = mongoose.model("game", gameSchema);
+
+app.post("/createGame", function(req,res) {
+  let newGame = new Game({
+    date: req.body.date,
+    opponent: req.body.opponent,
+    venue: req.body.venue,
+    score: req.body.score,
+    victor: req.body.victor,
+    pointGetters: req.body.pointGetters
+  })
+
+  newGame.save();
+  res.redirect("/")
+})
+
+const renderGames = (gamesArray) => {
+  let text = "Lewis Mens Soccer Schedule: <br/><br/>";
+  gamesArray.forEach((game)=>{
+    text += "date: " + game.date + "<br/>";
+    text += "opponent: " + game.opponent + "<br/>"; 
+    text += "id: " + game.id + "<br/><br/>";
+  })
+  text += "total count: " + gamesArray.length;
+  return text
+}
+
+app.get("/readGames", function(request, response) {
+  Game.find({}).then(games => {
+    response.type('text/plain');
+    response.send(renderGames(games));
+  })
+})
+
+app.get("/readPlayers", function(request, response) {
   Player.find({}).then(players => {
     response.type('text/plain');
     response.send(renderPlayers(players));
@@ -88,20 +138,14 @@ app.get('/readRoster', function(req,res) {
   res.sendFile(__dirname + '/static/readRoster.html')
 })
 
-app.get('/schedule',function(req,res) {
-	res.sendFile(__dirname + '/static/schedule.html')
+app.get('/editSchedule',function(req,res) {
+	res.sendFile(__dirname + '/static/editSchedule.html')
 })
 
-var games = { 
-      "games": [
-        {"date":"08/25/22","opponent":"Purdue Northwest University","venue":"home","score":"2-0 Lewis","point-getters":["Zimmerman (G)", "Shevchenko (G)", "Darlage (A)", "Beaulieu (A)" ]}
-      ]
-}
-
-app.get('/games', (request, response) => {
-  response.type('application/json')
-  response.send(JSON.stringify(games, null, 4))
+app.get('/readSchedule', function(req,res) {
+  res.sendFile(__dirname + '/static/readSchedule.html')
 })
+
 
 // Custom 404 page.
 app.use((request, response) => {
