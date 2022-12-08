@@ -109,7 +109,11 @@ const renderGames = (gamesArray) => {
   let text = "Lewis Mens Soccer Schedule: <br/><br/>";
   gamesArray.forEach((game)=>{
     text += "date: " + game.date + "<br/>";
-    text += "opponent: " + game.opponent + "<br/>"; 
+    text += "opponent: " + game.opponent + "<br/>";
+    text += "venue: " + game.venue + "<br/>";
+    text += "score: " + game.score + "<br/>";
+    text += "victor: " + game.victor + "<br/>";
+    text += "point getters: " + game.pointGetters + "<br/>"; 
     text += "id: " + game.id + "<br/><br/>";
   })
   text += "total count: " + gamesArray.length;
@@ -123,11 +127,33 @@ app.get("/readGames", function(request, response) {
   })
 })
 
-app.get("/readPlayers", function(request, response) {
-  Player.find({}).then(players => {
-    response.type('text/plain');
-    response.send(renderPlayers(players));
-  })
+app.post("/updateGame", function(req, res) {
+  Game.findByIdAndUpdate(
+    req.body.id,
+    {date:req.body.newDate, opponent:req.body.newOpponent,
+    venue:req.body.newVenue, score:req.body.newScore,
+    victor:req.body.newVictor, pointGetters:req.body.newPointGetters},
+    function (err, docs) {
+      if (err) {
+        console.log(err)
+      } else {
+        console.log("i hope this updated it!")
+      }
+    })
+  res.redirect("/")
+})
+
+app.post("/deleteGame", function(req, res) {
+  Game.findByIdAndDelete(
+    req.body.id,
+    function(err, docs) {
+      if (err) {
+        console.log(err)
+      } else {
+        console.log("i hope this deleted it")
+      }
+    })
+    res.redirect("/")
 })
 
 app.get('/editRoster',function(req,res) {

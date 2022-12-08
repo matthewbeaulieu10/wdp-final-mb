@@ -20,6 +20,23 @@
             <label>Point Getters: </label> <input name="pointGetters"></input><br />
             <button>Create New Game</button>
         </form>
-    </div>
+        <h3>Update Current Game</h3>
+        <form class ="container" method="post" action="/updateGame">
+            <label>ID: </label> <input name="id"></input><br />
+            <label>New Date: </label> <input name="newDate"></input><br />
+            <label>New Opponent: </label> <input name="newOpponent"></input><br />
+            <label>New Venue: </label> <input name="newVenue"></input><br />
+            <label>New Score: </label> <input name="newScore"></input><br />
+            <label>New Victor: </label> <input name="newVictor"></input><br />
+            <label>New Point Getters: </label> <input name="newPointGetters"></input><br />
+            <button>Update Game</button>
+        </form>
+
+        <h3>Delete Current Player</h3>
+        <form class ="container" method="post" action="/deleteGame">
+            <label>ID: </label> <input name="id"></input><br />
+            <button>Delete Game</button>
+        </form>
+        </div>
 </body>
 </html>
