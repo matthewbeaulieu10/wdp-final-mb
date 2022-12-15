@@ -14,7 +14,15 @@ html {
     height:40px;
 }
 
-.menuButton {
+button {
     background-color:white;
     border-style:none;
+    color:red;
+    border-radius:12px;
+}
+
+input {
+    border-style: none;
+    border-radius: 12px;
+    color:red;
 }
